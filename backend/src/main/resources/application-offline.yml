@@ -1,0 +1,14 @@
+# Offline / demo profile: no model connectivity required.
+# Document extraction uses a deterministic label parser and the investigator uses
+# rule-based summaries; every result is labelled OFFLINE_FALLBACK.
+spring:
+  ai:
+    model:
+      chat: none
+    chat:
+      client:
+        enabled: false
+
+bankos:
+  ai:
+    mode: offline

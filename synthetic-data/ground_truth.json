@@ -1,0 +1,29 @@
+{
+  "dataset": "bankos-synthetic",
+  "seed": 2401,
+  "payments_sha256": "a7e726e3fe7c3850a98ab7faf987df8f321b86dac8c0cbe9ac114f101345be34",
+  "policy_version": 1,
+  "notes": "Labels are kept outside prompts and API responses. PAY-1033 has no payment_id in its settlement but links by reference (clean). INV-2070 contains a prompt-injection line and must still be treated as data.",
+  "anomalies": [
+    {"type": "DUPLICATE_SETTLEMENT", "subject_id": "PAY-1042", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Two distinct SETTLED settlements SET-1042-A/B for one payment"},
+    {"type": "INVOICE_MISMATCH", "subject_id": "PAY-1042", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "INV-2042 shows payment reference RF-260024 instead of RF-261042"},
+    {"type": "DUPLICATE_SETTLEMENT", "subject_id": "PAY-1077", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Two distinct SETTLED settlements SET-1077-A/B"},
+    {"type": "MISSING_SETTLEMENT", "subject_id": "PAY-1013", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "No settlement row at all"},
+    {"type": "MISSING_SETTLEMENT", "subject_id": "PAY-1129", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Only a PENDING settlement"},
+    {"type": "MISSING_SETTLEMENT", "subject_id": "PAY-1161", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Only a REVERSED settlement"},
+    {"type": "AMOUNT_MISMATCH", "subject_id": "PAY-1055", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Settled 20.00 EUR less (outside tolerance 10)"},
+    {"type": "AMOUNT_MISMATCH", "subject_id": "PAY-1188", "expected_status": "AUTO_MATCHED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Settled 7.50 EUR more: within tolerance 10, outside tolerance 5 (policy replay case)"},
+    {"type": "AMOUNT_MISMATCH", "subject_id": "PAY-1099", "expected_status": "AUTO_MATCHED", "expected_status_tolerance_5": "AUTO_MATCHED", "note": "Settled 4.00 EUR less (within both tolerances)"},
+    {"type": "AMOUNT_MISMATCH", "subject_id": "PAY-1144", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Settled 750.00 EUR less"},
+    {"type": "CURRENCY_MISMATCH", "subject_id": "PAY-1066", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "EUR payment settled in USD"},
+    {"type": "REFERENCE_MISMATCH", "subject_id": "PAY-1120", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Settlement carries reference RF-999120"},
+    {"type": "UNEXPECTED_SETTLEMENT", "subject_id": "SET-9001", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Settlement for unknown payment PAY-9999"},
+    {"type": "AMBIGUOUS_MATCH", "subject_id": "SET-9002", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "No payment ID; amount fits PAY-1150 and PAY-1151"},
+    {"type": "EXPORT_DUPLICATE", "subject_id": "SET-1101", "expected_status": "AUTO_MATCHED", "expected_status_tolerance_5": "AUTO_MATCHED", "note": "Identical repeated export row"},
+    {"type": "EXPORT_DUPLICATE", "subject_id": "SET-1170", "expected_status": "AUTO_MATCHED", "expected_status_tolerance_5": "AUTO_MATCHED", "note": "Identical repeated export row"},
+    {"type": "DUPLICATE_PAYMENT", "subject_id": "PAY-1180", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Payment register lists PAY-1180 twice"},
+    {"type": "INVOICE_MISMATCH", "subject_id": "PAY-1030", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "Invoice INV-2030 is 150.00 higher than the payment"},
+    {"type": "MISSING_INVOICE", "subject_id": "PAY-1090", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "INV-2090.pdf is a scan without a text layer"},
+    {"type": "MISSING_INVOICE", "subject_id": "PAY-1135", "expected_status": "REVIEW_REQUIRED", "expected_status_tolerance_5": "REVIEW_REQUIRED", "note": "INV-2135 was never provided"}
+  ]
+}

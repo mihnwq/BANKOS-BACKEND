@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "currency": "EUR",
+  "amount_tolerance": 10,
+  "require_invoice": true,
+  "duplicate_payment_allowed": false,
+  "missing_settlement": "REVIEW_REQUIRED",
+  "ambiguous_reference": "REVIEW_REQUIRED",
+  "unexpected_settlement": "REVIEW_REQUIRED",
+  "reference_mismatch": "REVIEW_REQUIRED",
+  "export_duplicate": "AUTO_MATCHED"
+}

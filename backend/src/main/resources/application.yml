@@ -1,0 +1,62 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: bankos
+  profiles:
+    # No OPENAI_API_KEY? The app still runs end-to-end with deterministic, clearly labelled fallbacks.
+    # Switch to real model calls with SPRING_PROFILES_ACTIVE=live.
+    default: offline
+  datasource:
+    url: jdbc:h2:file:./data/bankos
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        auto_quote_keyword: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 30MB
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      chat:
+        model: ${OPENAI_MODEL:gpt-5-mini}
+    model:
+      # Only the chat model is used; keep the other OpenAI models switched off.
+      embedding: none
+      image: none
+      moderation: none
+      audio:
+        speech: none
+        transcription: none
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+bankos:
+  ai:
+    # live = call the model, offline = deterministic fixture-based agents
+    mode: live
+    timeout-seconds: 45
+    max-tool-calls: 4
+  processing:
+    async: true
+    max-investigations-per-batch: 40
+  storage:
+    upload-dir: ./data/uploads
+  data:
+    policies-file: ../synthetic-data/policies.json
+    ground-truth-file: ../synthetic-data/ground_truth.json
+  cors:
+    allowed-origins: http://localhost:5173,http://localhost:3000

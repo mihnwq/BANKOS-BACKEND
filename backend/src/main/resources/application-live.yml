@@ -1,0 +1,12 @@
+# Live profile: real OpenAI calls through Spring AI. Requires OPENAI_API_KEY.
+spring:
+  ai:
+    model:
+      chat: openai
+    retry:
+      # Keep retries inside bankos.ai.timeout-seconds; failures escalate the case to review.
+      max-attempts: 2
+
+bankos:
+  ai:
+    mode: live
